@@ -1,25 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+
+import GlobalStyles from './assets/styles/Global';
+
+import Routes from './Routes';
+
+import dark from './assets/styles/themes/dark';
 
 function App() {
+  useEffect(() => {
+    const isFirstTime = localStorage.getItem('FirstTime');
+    
+    if (!isFirstTime) {
+      localStorage.setItem('FirstTime', 'true');
+      return
+    }
+
+    localStorage.setItem('FirstTime', 'false')
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={dark}>
+      <BrowserRouter>
+        <GlobalStyles />
+        <Routes />
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
