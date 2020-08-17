@@ -9,6 +9,7 @@ export default createGlobalStyle`
     padding: 0;
     margin: 0;
     outline: 0;
+    box-sizing: border-box;
 
     font-family: 'Roboto';
   }
@@ -19,7 +20,9 @@ export default createGlobalStyle`
     height: 100vh;
     width: 100vw;
 
-    color: ${props => props.theme.colors.text}
+    color: ${props => props.theme.colors.text};
+
+    overflow-x: hidden;
   }
 
   .button {
