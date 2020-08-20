@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Container } from './styles';
 
+import Header from './components/Header';
+import Categories from './components/Categories';
+
+
 const Posts: React.FC = () => {
+  const [category, setCategory] = useState('');
+
   return (
     <Container>
-      <h1> Infelizmente, o Francisco, o tal do desenvolvedor do site, <br /> não acabou essa parte </h1>
+      <Header 
+        category={category} 
+        setCategory={setCategory} 
+      />
+      <Categories
+        category={category}
+      />
     </Container>
   )
 }

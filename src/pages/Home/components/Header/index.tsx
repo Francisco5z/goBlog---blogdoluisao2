@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Container } from './styles';
 
-import Logo from '../../../../assets/Logo.png';
+import Logo from '../../../../assets/goBlog.svg';
 
 interface Props {
   redirectToPost: () => void;
