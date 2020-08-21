@@ -1,10 +1,11 @@
 import React, { useState, ChangeEvent } from 'react';
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
-import { Container, SearchInputBox } from './styles';
+import { Container, SearchInputBox , CloseSearchBox } from './styles';
 
 import Logo from '../../../../assets/goBlog.svg';
 import { AiOutlineSearch } from 'react-icons/ai';
+import { MdClose } from 'react-icons/md'
 import { useTheme } from 'styled-components';
 
 interface Props {
@@ -17,6 +18,7 @@ const Header: React.FC<Props> = ({ setCategory, category }) => {
 
   const { colors: { primary } } = useTheme();
 
+  const { push } = useHistory();
 
   function handleInputVisibility() {
     setSearchInputBoxVisibility(searchInputBoxVisibility ? false : true);
@@ -27,8 +29,12 @@ const Header: React.FC<Props> = ({ setCategory, category }) => {
 
   return (
     <Container searchIconAnimation={searchInputBoxVisibility.toString()}>
-      <img src={Logo} alt="goBlog"/>
-      <SearchInputBox visibility={searchInputBoxVisibility.toString()}>
+      <img 
+        src={Logo} 
+        alt="goBlog"
+        onClick={() => push('/')} 
+      />
+      <SearchInputBox scroll={window.pageYOffset} visibility={searchInputBoxVisibility.toString()}>
         <input 
           type="text" 
           placeholder="Pesquisar por" 
@@ -36,7 +42,10 @@ const Header: React.FC<Props> = ({ setCategory, category }) => {
           onChange={handleChangeInputValue}
         />
       </SearchInputBox>
-      <AiOutlineSearch onClick={handleInputVisibility} color={primary} size={45} />
+      <CloseSearchBox onClick={() => setSearchInputBoxVisibility(false)} searchBoxVisibility={searchInputBoxVisibility.toString()}>
+        <MdClose size={45} color={primary} />
+      </CloseSearchBox>
+      <AiOutlineSearch className="searchIcon" onClick={handleInputVisibility} color={primary} size={45} />
     </Container>
   );
 }

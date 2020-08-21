@@ -31,4 +31,12 @@ export default createGlobalStyle`
     border-radius: 4px;
     color: #fff;
   }
+
+  a {
+    text-decoration: none;
+
+    font-size: 2rem;
+
+    color: ${props => props.theme.colors.primary};
+  }
 `;

@@ -14,7 +14,7 @@ function App() {
     
     if (!isFirstTime) {
       localStorage.setItem('FirstTime', 'true');
-      return
+      return;
     }
 
     localStorage.setItem('FirstTime', 'false')

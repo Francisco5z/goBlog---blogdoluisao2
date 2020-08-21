@@ -5,7 +5,7 @@ const clockwise = keyframes`
     transform: rotate(0deg);
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate(360deg) scale(0.1);
   }
 `;
 
@@ -30,11 +30,15 @@ export const Container = styled.header<{ searchIconAnimation: string }>`
   img {
     width: 150px;
 
+    cursor: pointer;
+
     z-index: 10;
   }
 
-  svg {
+  svg.searchIcon {
     cursor: pointer;
+
+    display: ${props => props.searchIconAnimation === 'true' ? "none" : "unset"};
 
     z-index: 10;
 
@@ -42,7 +46,7 @@ export const Container = styled.header<{ searchIconAnimation: string }>`
   }
 `;
 
-export const SearchInputBox = styled.div<{ visibility: string }>`
+export const SearchInputBox = styled.div<{ visibility: string, scroll: number }>`
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -58,10 +62,10 @@ export const SearchInputBox = styled.div<{ visibility: string }>`
   height: 105px;
 
   @media (max-width: 680px) {
-    justify-content: flex-start;
+    justify-content: center;
     align-items: flex-end;
 
-    padding: 0 ${props => props.visibility === 'true' ? "0" : "-1000px"} 0 50px;
+    padding: 0 ${props => props.visibility === 'true' ? "0" : "-1000px"} 0 1px;
 
     height: 140px;
 
@@ -90,6 +94,8 @@ export const SearchInputBox = styled.div<{ visibility: string }>`
 
     opacity: ${props => props.visibility === 'true' ? "1" : "0"};
 
+    opacity: ${props => props.visibility === 'true' && props.scroll < 100 ? "1" : "0"};
+    
     &:focus {
       transition: none;
 
@@ -99,5 +105,30 @@ export const SearchInputBox = styled.div<{ visibility: string }>`
         color: #eee;
       }
     }
+
+    ${props => props.visibility === 'true' ? "" : ""} ;
+  }
+`;
+
+
+const appear = keyframes`
+  from {
+    transform: scale(0) rotate(0deg);
+  }
+  to {
+    transform: scale(1) rotate(360deg);
+  }
+`;
+export const CloseSearchBox = styled.div<{ searchBoxVisibility: string }>`
+  display: ${props => props.searchBoxVisibility === 'true' ? "flex" : "none"};
+
+  z-index: 10;
+
+  svg {
+    display: flex;
+
+    cursor: pointer;
+
+    animation: ${props => props.searchBoxVisibility === 'true' ? appear : ""} 250ms linear;
   }
 `;

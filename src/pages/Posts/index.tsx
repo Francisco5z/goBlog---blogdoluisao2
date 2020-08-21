@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-import { Container } from './styles';
+import { Container, Main } from './styles';
 
 import Header from './components/Header';
 import Categories from './components/Categories';
-
+import ListPosts from './components/ListPosts';
 
 const Posts: React.FC = () => {
   const [category, setCategory] = useState('');
@@ -18,6 +18,9 @@ const Posts: React.FC = () => {
       <Categories
         category={category}
       />
+      <Main>
+        <ListPosts />
+      </Main>
     </Container>
   )
 }
